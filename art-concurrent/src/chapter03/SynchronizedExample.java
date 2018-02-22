@@ -1,18 +1,18 @@
 package chapter03;
 
 class SynchronizedExample {
-    int     a    = 0;
+    int a = 0;
     boolean flag = false;
 
-    public synchronized void writer() { //»ñÈ¡Ëø
+    public synchronized void writer() { //è·å–é”
         a = 1;
         flag = true;
-    } //ÊÍ·ÅËø
+    } //é‡Šæ”¾é”
 
-    public synchronized void reader() { //»ñÈ¡Ëø
+    public synchronized void reader() { //è·å–é”
         if (flag) {
             int i = a;
-            //¡­¡­
-        } //ÊÍ·ÅËø
+            //...
+        } //é‡Šæ”¾é”
     }
 }

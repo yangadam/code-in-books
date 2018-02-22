@@ -1,6 +1,6 @@
-/**
- * Alipay.com Inc.
- * Copyright (c) 2004-2015 All Rights Reserved.
+/*
+  Alipay.com Inc.
+  Copyright (c) 2004-2015 All Rights Reserved.
  */
 package chapter02;
 
@@ -9,37 +9,33 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * ¼ÆÊıÆ÷
+ * è®¡æ•°å™¨
  * 
  * @author tengfei.fangtf
- * @version $Id: Snippet.java, v 0.1 2015-7-31 ÏÂÎç11:32:42 tengfei.fangtf Exp $
+ * @version $Id: Snippet.java, v 0.1 2015-7-31 ä¸‹åˆ11:32:42 tengfei.fangtf Exp $
  */
 public class Counter {
 
     private AtomicInteger atomicI = new AtomicInteger(0);
-    private int           i       = 0;
+    private int i = 0;
 
     public static void main(String[] args) {
         final Counter cas = new Counter();
-        List<Thread> ts = new ArrayList<Thread>(600);
+        List<Thread> ts = new ArrayList<>(600);
         long start = System.currentTimeMillis();
         for (int j = 0; j < 100; j++) {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for (int i = 0; i < 10000; i++) {
-                        cas.count();
-                        cas.safeCount();
-                    }
+            Thread t = new Thread(() -> {
+                for (int i = 0; i < 10000; i++) {
+                    cas.count();
+                    cas.safeCount();
                 }
             });
             ts.add(t);
         }
         for (Thread t : ts) {
             t.start();
-
         }
-        // µÈ´ıËùÓĞÏß³ÌÖ´ĞĞÍê³É
+        // ç­‰å¾…æ‰€æœ‰çº¿ç¨‹æ‰§è¡Œå®Œæˆ
         for (Thread t : ts) {
             try {
                 t.join();
@@ -54,7 +50,7 @@ public class Counter {
     }
 
     /**
-     * Ê¹ÓÃCASÊµÏÖÏß³Ì°²È«¼ÆÊıÆ÷
+     * ä½¿ç”¨CASå®ç°çº¿ç¨‹å®‰å…¨è®¡æ•°å™¨
      */
     private void safeCount() {
         for (;;) {
@@ -67,7 +63,7 @@ public class Counter {
     }
 
     /**
-     * ·ÇÏß³Ì°²È«¼ÆÊıÆ÷
+     * éçº¿ç¨‹å®‰å…¨è®¡æ•°å™¨
      */
     private void count() {
         i++;

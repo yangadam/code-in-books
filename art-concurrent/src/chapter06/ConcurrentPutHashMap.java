@@ -8,15 +8,15 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * ²¢·¢put
+ * å¹¶å‘put
  * 
  * @author tengfei.fangtf
- * @version $Id: Snippet.java, v 0.1 2015-7-31 ÏÂÎç11:53:55 tengfei.fangtf Exp $
+ * @version $Id: Snippet.java, v 0.1 2015-7-31 ä¸‹åˆ11:53:55 tengfei.fangtf Exp $
  */
 public class ConcurrentPutHashMap {
 
     public static void main(String[] args) throws InterruptedException {
-        final HashMap<String, String> map = new HashMap<String, String>(2);
+        final HashMap<String, String> map = new HashMap<>(2);
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {

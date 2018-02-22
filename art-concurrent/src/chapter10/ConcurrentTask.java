@@ -1,12 +1,6 @@
 package chapter10;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 public class ConcurrentTask {
 
@@ -22,17 +16,17 @@ public class ConcurrentTask {
                         return taskName;
                     }
                 };
-                //1.2创建任务
+                //1.2鍒涘缓浠诲姟
                 FutureTask<String> futureTask = new FutureTask<String>(task);
                 future = taskCache.putIfAbsent(taskName, futureTask); //1.3
                 if (future == null) {
                     future = futureTask;
-                    futureTask.run(); //1.4执行任务
+                    futureTask.run(); //1.4鎵ц浠诲姟
                 }
             }
 
             try {
-                return future.get(); //1.5,2.2线程在此等待任务执行完成
+                return future.get(); //1.5,2.2绾跨▼鍦ㄦ绛夊緟浠诲姟鎵ц瀹屾垚
             } catch (CancellationException e) {
                 taskCache.remove(taskName, future);
             }

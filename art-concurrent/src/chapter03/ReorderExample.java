@@ -1,7 +1,7 @@
 package chapter03;
 
 class ReorderExample {
-    int     a    = 0;
+    int a = 0;
     boolean flag = false;
 
     public void writer() {
@@ -12,7 +12,7 @@ class ReorderExample {
     public void reader() {
         if (flag) { //3
             int i = a * a; //4
-            //s¡­¡­
+            //s...
         }
     }
 }

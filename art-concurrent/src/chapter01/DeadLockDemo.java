@@ -1,1 +1,49 @@
-package chapter01;/** * ËÀËøÀý×Ó *  * @author tengfei.fangtf * @version $Id: DeadLockDemo.java, v 0.1 2015-7-18 ÏÂÎç10:08:28 tengfei.fangtf Exp $ */public class DeadLockDemo {    /** AËø */    private static String A = "A";    /** BËø */    private static String B = "B";    public static void main(String[] args) {        new DeadLockDemo().deadLock();    }    private void deadLock() {        Thread t1 = new Thread(new Runnable() {            @Override            public void run() {                synchronized (A) {                    try {                        Thread.sleep(2000);                    } catch (InterruptedException e) {                        e.printStackTrace();                    }                    synchronized (B) {                        System.out.println("1");                    }                }            }        });        Thread t2 = new Thread(new Runnable() {            @Override            public void run() {                synchronized (B) {                    synchronized (A) {                        System.out.println("2");                    }                }            }        });        t1.start();        t2.start();    }}
+package chapter01;
+
+/**
+ * æ­»é”ä¾‹å­
+ * 
+ * @author tengfei.fangtf
+ * @version $Id: DeadLockDemo.java, v 0.1 2015-7-18 ä¸‹åˆ10:08:28 tengfei.fangtf Exp $
+ */
+public class DeadLockDemo {
+
+    /**
+     * Aé”
+     */
+    private static final String A = "A";
+    /**
+     * Bé”
+     */
+    private static final String B = "B";
+
+    public static void main(String[] args) {
+        new DeadLockDemo().deadLock();
+    }
+
+    private void deadLock() {
+        Thread t1 = new Thread(() -> {
+            synchronized (A) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                synchronized (B) {
+                    System.out.println("1");
+                }
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            synchronized (B) {
+                synchronized (A) {
+                    System.out.println("2");
+                }
+            }
+        });
+        t1.start();
+        t2.start();
+    }
+
+}

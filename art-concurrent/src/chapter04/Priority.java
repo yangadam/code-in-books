@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Priority {
     private static volatile boolean notStart = true;
-    private static volatile boolean notEnd   = true;
+    private static volatile boolean notEnd = true;
 
     public static void main(String[] args) throws Exception {
         List<Job> jobs = new ArrayList<Job>();
